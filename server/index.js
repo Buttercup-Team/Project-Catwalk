@@ -81,17 +81,14 @@ app.put('/reviews/report', (req, res) => {
 
 // API request to post a new review
 app.post('/newReview/', (req, res) => {
-  console.log('at the server', req.body);
-  axios.post(`${url}reviews`, req.body.reviewObj, {
-    headers: { Authorization: TOKEN },
-  })
+  axios.post(`http://localhost:3003/newReview/`, req.body.reviewObj)
     .then((response) => {
       console.log('server review submit success');
-      res.sendStatus(201);
+      res.send(201);
     })
     .catch((err) => {
       console.log('server review submit error', err);
-      res.sendStatus(500);
+      res.send(500);
     });
 });
 
