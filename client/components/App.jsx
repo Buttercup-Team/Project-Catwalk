@@ -165,7 +165,7 @@ const App = () => {
                   .then((allReviews) => {
                     setReviews(allReviews.data.results);
                     // get questions for q&a
-                    axios.get(`/questions/id=${productID}`)
+                    axios.get(`/questions/${productID}`)
                       .then((question) => {
                         setQuestions(question.data.results);
                       })

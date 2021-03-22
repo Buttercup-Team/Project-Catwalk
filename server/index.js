@@ -6,7 +6,7 @@ const port = 3000;
 const path = require('path');
 const { reset } = require('nodemon');
 const config = require('../config.js');
-const TOKEN = config.TOKEN
+const TOKEN = config.TOKEN;
 
 const PUBLIC_DIR = path.resolve(__dirname, '..', 'public');
 
@@ -58,9 +58,7 @@ app.get('/api/reviews/meta/:product_id', (req, res) => {
 
 app.get('/questions/:params', (req, res) => {
   const { params } = req.params;
-  axios.get(`${url}qa/questions/?product_${params}`, {
-    headers: { Authorization: TOKEN },
-  })
+  axios.get(`http://localhost:3001/questions/${params}`)
     .then((data) => res.send(data.data))
     .catch((err) => console.log('error getting questions', err.response.data));
 });
