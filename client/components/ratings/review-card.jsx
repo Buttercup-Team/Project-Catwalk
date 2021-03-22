@@ -41,7 +41,7 @@ const ReviewCard = ({ review, newList }) => {
   function handleYesClick() {
     if (!help) {
       review.helpfulness += 1;
-      axios.put('/reviews/help', { id: review.review_id })
+      axios.put('/reviews/help', { id: review.id })
         .then(() => {
           setHelp(true);
           newList();
@@ -53,7 +53,7 @@ const ReviewCard = ({ review, newList }) => {
   // reporting the review will remove it from the database
   function handleReportClick() {
     if (report === 'Report') {
-      axios.put('/reviews/report', { id: review.review_id })
+      axios.put('/reviews/report', { id: review.id })
         .then(() => {
           setReport('Reported');
           newList();
