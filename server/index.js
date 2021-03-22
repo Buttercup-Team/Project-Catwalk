@@ -6,7 +6,7 @@ const port = 3000;
 const path = require('path');
 const { reset } = require('nodemon');
 const config = require('../config.js');
-const TOKEN = config.TOKEN
+const TOKEN = config.TOKEN;
 
 const PUBLIC_DIR = path.resolve(__dirname, '..', 'public');
 
