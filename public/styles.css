@@ -29,7 +29,7 @@ body {
   color: darkgreen;
   font-size:48px;
   /* font-family:verdana; */
-  font-family: 'Brush Script MT', cursive;
+  font-family: 'Arial', sans-serif;
   margin: 10px;
   padding-left:9px;
   display: inline-block;
@@ -146,15 +146,48 @@ body {
 
 #productView {
   display: flex;
+  position: relative;
   flex-direction: column;
   flex: 1 1 auto;
   margin-left: 20px;
 }
 
+.expandedImgSlideView {
+  position: absolute;
+  top: 0px;
+  z-index: -1;
+  left: -20px;
+  width: 500px;
+  height: 700px;
+  overflow: hidden;
+}
 
+.expandedImgSlide {
+  position: absolute;
+  z-index: 99;
+  height: 1600px;
+  width: 1400px;
+}
+
+.zIndex9 {
+  z-index: 9;
+}
+
+.hiddenImgSlide {
+  position: absolute;
+  z-index: 99;
+  height: 1600px;
+  width: 1400px;
+  left: -1400px;
+  -webkit-transition: 250ms;
+  -moz-transition: 250ms;
+  -o-transition: 250ms;
+  transition: 250ms;
+}
 
 #productDiscContainer {
   display: flex;
+  padding: 30px;
 }
 #productDiscContainer > ul{
   width: auto;
@@ -179,12 +212,15 @@ body {
   padding: 0px;
   height: 700px;
   width: 800px;
+  cursor: zoom-in;
   position: relative;
 }
 
 .imgContainer {
   background-color: pink;
   height: 700px;
+  display: flex;
+  align-items: center;
   clear: both;
   position: relative;
   -webkit-transition: left 2s;
@@ -198,8 +234,9 @@ body {
   background-color: rgba(128, 125, 125, 0.76);
   border-radius: 2em;
   top: 45%;
-  left: 740px;
+  left: 90%;
   width: 50px;
+  opacity: 75%;
 }
 
 .leftArrow {
@@ -210,6 +247,7 @@ body {
   top: 45%;
   left: 80px;
   transform: rotate(180deg);
+  opacity: 75%;
 }
 
 .mainImgThumbnailSlider {
@@ -217,7 +255,7 @@ body {
   width: 80px;
   height: 515px;
   margin-top: auto;
-  top: 45px;
+  top: 13%;
   left: 0px;
   overflow: hidden;
 
@@ -262,10 +300,10 @@ body {
 }
 
 .thumbnailArrowUpper {
-  top: 5px;
+  top: 6%;
 }
 .thumbnailArrowLower {
-  top: 560px;
+  top: 87%;
 }
 
 .rotate180 {

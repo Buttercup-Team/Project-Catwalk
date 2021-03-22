@@ -10,8 +10,9 @@ const ImageGallery = (props) => {
     thumbnailView,
     handleArrowClick,
     handleImgThumbnailClick,
+    handleMainImgMoveHandler,
+    imgSlideClickHandler,
   } = props;
-// console.log(styles)
 
   return (
     <div id="imgSlider">
@@ -20,6 +21,7 @@ const ImageGallery = (props) => {
         style={
           { left: imgView * -800, width: styles[selectedStyle].photos.length * 800 }
         }
+        onMouseMove={handleMainImgMoveHandler}
       >
         {styles[selectedStyle].photos.map((photo) => (
           <img
@@ -27,12 +29,14 @@ const ImageGallery = (props) => {
             alt={photo.url}
             key={`photo${photo.url}`}
             className="imgNormalSlide"
+            onClick={imgSlideClickHandler}
           />
         ))}
       </div>
       <button
         type="button"
         onClick={handleArrowClick}
+        name="image carousel left arrow"
       >
         <img
           src="./img/arrow.png"
@@ -45,6 +49,7 @@ const ImageGallery = (props) => {
       <button
         type="button"
         onClick={handleArrowClick}
+        name="image carousel right arrow"
       >
         <img
           src="./img/arrow.png"
@@ -69,6 +74,7 @@ const ImageGallery = (props) => {
               key={`button${photo.thumbnail_url}`}
               className="mainImgThumbnailButton"
               style={{ top: idx * 75 }}
+              name={`thumbnail for style ${styles[selectedStyle].name}`}
             >
               <img
                 src={photo.thumbnail_url}
@@ -83,7 +89,7 @@ const ImageGallery = (props) => {
       </div>
       <button
         type="button"
-        // className="thumbnailArrowButton thumbnailArrowUpper"
+        name="image carousel thumbnail up arrow"
         className={thumbnailView === 0 ? 'hiddenEle' : 'thumbnailArrowButton thumbnailArrowUpper'}
         onClick={handleArrowClick}
       >
@@ -97,6 +103,7 @@ const ImageGallery = (props) => {
       </button>
       <button
         type="button"
+        name="image carousel thumbnail down arrow"
         className={thumbnailView + 7 >= styles[selectedStyle].photos.length ? 'hiddenEle' : 'thumbnailArrowButton thumbnailArrowLower'}
         onClick={handleArrowClick}
       >
