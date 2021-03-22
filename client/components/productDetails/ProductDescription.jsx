@@ -7,7 +7,7 @@ const ProductDescription = (props) => {
   return (
     <div id="productDiscContainer" className="">
       <div className="flexGrow3">
-        <h3>{product.slogan}</h3>
+        <span className="">{product.slogan}</span>
         <span>
           {product.description}
         </span>
