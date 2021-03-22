@@ -93,7 +93,7 @@ app.post('/newReview/', (req, res) => {
 // API request to post a new answer to an existing question
 app.post('/api/qa/questions/:questionId/answers', (req, res) => {
   const { questionId } = req.params;
-  axios.post(`http://localhost:3001/api/qa/questions/${questionId}/answers`, req.body.params, {
+  axios.post(`${url}qa/questions/${questionId}/answers`, req.body.params, {
     headers: { Authorization: TOKEN },
   })
     .then((response) => {
@@ -108,7 +108,7 @@ app.post('/api/qa/questions/:questionId/answers', (req, res) => {
 
 // API request to post a new question
 app.post('/api/qa/questions', (req, res) => {
-  axios.post(`qa/questions`, req.body, {
+  axios.post(`${url}qa/questions`, req.body, {
     headers: { Authorization: TOKEN },
   })
     .then((response) => {
