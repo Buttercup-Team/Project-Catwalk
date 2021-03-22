@@ -148,9 +148,9 @@ const App = () => {
         // get the styles data from the default product id
         axios.get(`/styles/${productID}`)
           .then((styleRes) => {
-            setSelectedStyleImgMemory(styleMemArrMaker(styleRes.data.results.length));
-            setStyles(styleRes.data.results);
-            setStyles(styleRes.data.results);
+            setSelectedStyleImgMemory(styleMemArrMaker(styleRes.data.length));
+            setStyles(styleRes.data);
+            setStyles(styleRes.data);
             // get the reviews meta data from the default product id
             axios.get(`reviews/meta/id=${productID}`)
               .then((ratingMeta) => {
