@@ -152,7 +152,7 @@ const App = () => {
             setStyles(styleRes.data);
             setStyles(styleRes.data);
             // get the reviews meta data from the default product id
-            axios.get(`reviews/meta/id=${productID}`)
+            axios.get(`/api/reviews/meta/${productID}`)
               .then((ratingMeta) => {
                 const metaData = ratingMeta.data;
                 const good = parseInt(metaData.recommended.true, 10) || 0;
@@ -161,7 +161,7 @@ const App = () => {
                 setMeta(metaData);
                 setRating(getOverallRating(metaData));
                 // get all reviews for the default product id
-                axios.get(`reviews/id=${productID}&count=${totalReviews}`)
+                axios.get(`reviews/${productID}/relevant`)
                   .then((allReviews) => {
                     setReviews(allReviews.data.results);
                     // get questions for q&a

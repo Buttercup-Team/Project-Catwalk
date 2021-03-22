@@ -12,11 +12,11 @@ const Reviews = ({ reviews, metaData, setReviews }) => {
   // get new reviews
   const newList = (sort) => {
     if (sort) {
-      axios.get(`/reviews/id=${metaData.product_id}&count=${reviews.length}&sort=${sort}`)
+      axios.get(`/reviews/${metaData.product_id}/${sort}`)
         .then((resData) => setReviews(resData.data.results))
         .catch((err) => console.log('error in the post', err));
     } else {
-      axios.get(`/reviews/id=${metaData.product_id}&count=${reviews.length}&sort=${sortOrder}`)
+      axios.get(`/reviews/${metaData.product_id}/${sortOrder}`)
         .then((resData) => setReviews(resData.data.results))
         .catch((err) => console.log('error in the post', err));
     }
