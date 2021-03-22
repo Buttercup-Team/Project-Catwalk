@@ -77,13 +77,11 @@ const App = () => {
 
     if (direction === 'left') {
       arr[selectedStyle] = imgView === photoMax ? photoMax : updatedImgView - 1;
-      setThumbnailView(thumbnailView - 1);
       setSelectedStyleImgMemory(arr);
       setImgView(imgView <= 0 ? 0 : imgView - 1);
     }
     if (direction === 'right') {
       arr[selectedStyle] = imgView === photoMax ? photoMax : updatedImgView + 1;
-      setThumbnailView(thumbnailView + 1);
       if (imgView) setSelectedStyleImgMemory(arr);
       setImgView(imgView >= photoMax ? photoMax : imgView + 1);
     }
@@ -190,13 +188,12 @@ const App = () => {
       });
   };
 
+  useState(() => getOneProduct(20103));
+
   const handleNewProduct = (e) => {
     e.preventDefault();
     getOneProduct(newProductID);
   };
-
-  useState(() => getOneProduct(20103));
-
 
   return (
     <div className="">

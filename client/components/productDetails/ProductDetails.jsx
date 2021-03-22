@@ -8,17 +8,14 @@ const ProductDetails = (props) => {
     styles,
     overallRating,
     selectedStyle,
-    imgView,
-    mouseXY,
     handleStyleClick,
-    isImgViewClicked,
   } = props;
   // const [size, setSize] = useState('');
   // const [qty, setQty] = useState(0);
   const [SKU, setSKU] = useState(0);
   const [arr, setArr] = useState([0]);
   const someNumToSatisfyStarRating = 1059;
-  // const {mouseX, mouseY} = mouseXY;
+  // let arr = [];
 
   const arrMaker = (itemQty) => {
     setArr([0]);
@@ -45,27 +42,14 @@ const ProductDetails = (props) => {
 
   return (
     <div id="productView">
-      <div
-        className={
-          isImgViewClicked
-            ? 'expandedImgSlideView zIndex9'
-            : 'expandedImgSlideView'
-        }
-      >
-        <img
-          className="expandedImgSlide"
-          src={styles[selectedStyle].photos[imgView].url}
-          alt="magnified card"
-          className={isImgViewClicked === true ? 'expandedImgSlide' : 'hiddenImgSlide'}
-          style={isImgViewClicked ? { left: -mouseXY.x * 1.5 + 150, top: -mouseXY.y * 1.75 + 300 } : null}
-        />
-      </div>
+      {/* {console.log(arr)} */}
       <div className="ratingsComponent">
         <StarRating
           number={overallRating}
           uniqNum={someNumToSatisfyStarRating}
         />
       </div>
+      {/* {console.log('this is product', product)} */}
       <span className="paddingTop15px">{product.category}</span>
       <h1 className="">{styles[selectedStyle].name} {product.name}</h1>
       <div>
