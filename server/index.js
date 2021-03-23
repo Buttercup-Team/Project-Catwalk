@@ -17,13 +17,12 @@ const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/';
             'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/20113';
 
 // API request to get the product info
-app.get('/products/:params', (req, res) => {
+app.get('/product/:params', (req, res) => {
   const { params } = req.params;
   axios.get(`${url}products/${params}`, {
     headers: { Authorization: TOKEN },
   })
     .then((data) => {
-      console.log(data);
       res.send(data.data);
     })
     .catch((err) => console.log('error getting product info', err.response.data));
