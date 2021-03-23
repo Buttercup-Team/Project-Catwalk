@@ -17,12 +17,13 @@ const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/';
             'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/20113';
 
 // API request to get the product info
-app.get('/product/:params', (req, res) => {
+app.get('/products/:params', (req, res) => {
   const { params } = req.params;
   axios.get(`${url}products/${params}`, {
     headers: { Authorization: TOKEN },
   })
     .then((data) => {
+      console.log(data);
       res.send(data.data);
     })
     .catch((err) => console.log('error getting product info', err.response.data));
@@ -93,9 +94,7 @@ app.post('/newReview/', (req, res) => {
 // API request to post a new answer to an existing question
 app.post('/api/qa/questions/:questionId/answers', (req, res) => {
   const { questionId } = req.params;
-  axios.post(`${url}qa/questions/${questionId}/answers`, req.body.params, {
-    headers: { Authorization: TOKEN },
-  })
+  axios.post(`http://localhost:3001/qa/questions/${questionId}/answers`, req.body)
     .then((response) => {
       console.log('server answer submit response');
       res.send(201);
@@ -108,9 +107,7 @@ app.post('/api/qa/questions/:questionId/answers', (req, res) => {
 
 // API request to post a new question
 app.post('/api/qa/questions', (req, res) => {
-  axios.post(`${url}qa/questions`, req.body, {
-    headers: { Authorization: TOKEN },
-  })
+  axios.post('http://localhost:3001/qa/questions', req.body)
     .then((response) => {
       console.log('server question submit response');
       res.sendStatus(201);
@@ -124,9 +121,7 @@ app.post('/api/qa/questions', (req, res) => {
 // API request to increment the helpfulness of an answer
 app.put('/api/qa/answers/:answerId/helpful', (req, res) => {
   const { answerId } = req.params;
-  axios.put(`${url}qa/answers/${answerId}/helpful`, { body: { answer_id: req.body.id } }, {
-    headers: { Authorization: TOKEN },
-  })
+  axios.put(`http://localhost:3001/api/qa/answers/${answerId}/helpful`)
     .then((response) => {
       console.log('server helpfulness put response');
       res.sendStatus(201);
@@ -140,9 +135,7 @@ app.put('/api/qa/answers/:answerId/helpful', (req, res) => {
 // API request to increment the helpfulness of a question
 app.put('/api/qa/questions/:questionId/helpful', (req, res) => {
   const { questionId } = req.params;
-  axios.put(`${url}qa/questions/${questionId}/helpful`, { body: { question_id: req.body.id } }, {
-    headers: { Authorization: TOKEN },
-  })
+  axios.put(`http://localhost:3001/api/qa/questions/${questionId}/helpful`)
     .then((response) => {
       console.log('server helpfulness question put response');
       res.sendStatus(201);
@@ -156,9 +149,7 @@ app.put('/api/qa/questions/:questionId/helpful', (req, res) => {
 // API request to report this answer
 app.put('/api/qa/answers/:answerId/report', (req, res) => {
   const { answerId } = req.params;
-  axios.put(`${url}qa/answers/${answerId}/report`, { body: { answer_id: req.body.id } }, {
-    headers: { Authorization: TOKEN },
-  })
+  axios.put(`http://localhost:3001/qa/answers/${answerId}/report`)
     .then((response) => {
       console.log('server report put response');
       res.sendStatus(201);

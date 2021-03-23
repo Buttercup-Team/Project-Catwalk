@@ -142,7 +142,7 @@ const App = () => {
     // console.log(randomProductUrl);
 
     // get the default product to populate the page on start up
-    axios.get(`product/${productID}`)
+    axios.get(`products/${productID}`)
       .then((productRes) => {
         setProduct(productRes.data);
         // get the styles data from the default product id
