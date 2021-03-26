@@ -58,7 +58,7 @@ app.get('/api/reviews/meta/:product_id', (req, res) => {
 
 app.get('/questions/:params', (req, res) => {
   const { params } = req.params;
-  axios.get(`http://localhost:3001/questions/${params}`)
+  axios.get(`http://172.31.20.114:6000/questions/${params}`)
     .then((data) => res.send(data.data))
     .catch((err) => console.log('error getting questions', err.response.data));
 });
@@ -93,7 +93,7 @@ app.post('/newReview/', (req, res) => {
 // API request to post a new answer to an existing question
 app.post('/api/qa/questions/:questionId/answers', (req, res) => {
   const { questionId } = req.params;
-  axios.post(`http://localhost:3001/qa/questions/${questionId}/answers`, req.body)
+  axios.post(`http://172.31.20.114:6000/qa/questions/${questionId}/answers`, req.body)
     .then((response) => {
       console.log('server answer submit response');
       res.send(201);
@@ -106,7 +106,7 @@ app.post('/api/qa/questions/:questionId/answers', (req, res) => {
 
 // API request to post a new question
 app.post('/api/qa/questions', (req, res) => {
-  axios.post('http://localhost:3001/qa/questions', req.body)
+  axios.post('http://172.31.20.114:6000/qa/questions', req.body)
     .then((response) => {
       console.log('server question submit response');
       res.sendStatus(201);
@@ -120,7 +120,7 @@ app.post('/api/qa/questions', (req, res) => {
 // API request to increment the helpfulness of an answer
 app.put('/api/qa/answers/:answerId/helpful', (req, res) => {
   const { answerId } = req.params;
-  axios.put(`http://localhost:3001/api/qa/answers/${answerId}/helpful`)
+  axios.put(`http://172.31.20.114:6000/api/qa/answers/${answerId}/helpful`)
     .then((response) => {
       console.log('server helpfulness put response');
       res.sendStatus(201);
@@ -134,7 +134,7 @@ app.put('/api/qa/answers/:answerId/helpful', (req, res) => {
 // API request to increment the helpfulness of a question
 app.put('/api/qa/questions/:questionId/helpful', (req, res) => {
   const { questionId } = req.params;
-  axios.put(`http://localhost:3001/api/qa/questions/${questionId}/helpful`)
+  axios.put(`http://172.31.20.114:6000/api/qa/questions/${questionId}/helpful`)
     .then((response) => {
       console.log('server helpfulness question put response');
       res.sendStatus(201);
@@ -148,7 +148,7 @@ app.put('/api/qa/questions/:questionId/helpful', (req, res) => {
 // API request to report this answer
 app.put('/api/qa/answers/:answerId/report', (req, res) => {
   const { answerId } = req.params;
-  axios.put(`http://localhost:3001/qa/answers/${answerId}/report`)
+  axios.put(`http://172.31.20.114:6000/qa/answers/${answerId}/report`)
     .then((response) => {
       console.log('server report put response');
       res.sendStatus(201);
