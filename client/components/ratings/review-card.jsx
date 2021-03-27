@@ -73,43 +73,45 @@ const ReviewCard = ({ review, newList }) => {
   }
 
   // main render
-  return (
-    <div>
-      <StarRating number={review.rating} uniqNum={review.date} />
-      <span className="review-info">
-        <span>{review.reviewer_name}</span>
-        <span>,  </span>
-        <span>{correctDate(review.date)}</span>
-      </span>
-      <div className="review-summary">{review.summary}</div>
-      <div className="review-body">{review.body}</div>
-      {review.photos.map((photo) => (
-        <ImageModal key={photo.id} photo={photo} />
-      ))}
-      <Recommend />
-      <Response />
-      <div className="review-help">
-        <span className="normal">Helpful?  </span>
-        <button
-          type="submit"
-          className="clickable"
-          onClick={handleYesClick}
-        >
-          Yes (
-          {review.helpfulness}
-          )
-        </button>
-        <span className="normal">  |  </span>
-        <button
-          type="submit"
-          className="clickable"
-          onClick={handleReportClick}
-        >
-          {report}
-        </button>
+  if (review.urls) {
+    return (
+      <div>
+        <StarRating number={review.rating} uniqNum={review.date} />
+        <span className="review-info">
+          <span>{review.reviewer_name}</span>
+          <span>,  </span>
+          <span>{correctDate(review.date)}</span>
+        </span>
+        <div className="review-summary">{review.summary}</div>
+        <div className="review-body">{review.body}</div>
+        {review.urls.map((photo) => (
+          <ImageModal key={photo.id} photo={photo} />
+        ))}
+        <Recommend />
+        <Response />
+        <div className="review-help">
+          <span className="normal">Helpful?  </span>
+          <button
+            type="submit"
+            className="clickable"
+            onClick={handleYesClick}
+          >
+            Yes (
+            {review.helpfulness}
+            )
+          </button>
+          <span className="normal">  |  </span>
+          <button
+            type="submit"
+            className="clickable"
+            onClick={handleReportClick}
+          >
+            {report}
+          </button>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default ReviewCard;
