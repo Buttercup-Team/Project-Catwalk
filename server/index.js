@@ -4,36 +4,30 @@ const axios = require('axios');
 const app = express();
 const port = 3000;
 const path = require('path');
-const { reset } = require('nodemon');
-const config = require('../config.js');
-const TOKEN = config.TOKEN;
 
 const PUBLIC_DIR = path.resolve(__dirname, '..', 'public');
 
 app.use(express.static(PUBLIC_DIR));
 app.use(express.json());
 
-const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/';
-            'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/20113';
-
 // API request to get the product info
 app.get('/product/:params', (req, res) => {
   const { params } = req.params;
-  axios.get(`${url}products/${params}`, {
-    headers: { Authorization: TOKEN },
-  })
+  axios
+    .get(`http://18.217.87.199/product/${params}`)
     .then((data) => {
       res.send(data.data);
     })
-    .catch((err) => console.log('error getting product info', err.response.data));
+    .catch((err) =>
+      console.log('error getting product info', err.response.data)
+    );
 });
 
 // API request to get the styles
 app.get('/styles/:params', (req, res) => {
   const { params } = req.params;
-  axios.get(`${url}products/${params}/styles`, {
-    headers: { Authorization: TOKEN },
-  })
+  axios
+    .get(`http://18.217.87.199/styles/${params}`)
     .then((data) => {
       res.send(data.data);
     })
@@ -160,5 +154,5 @@ app.put('/api/qa/answers/:answerId/report', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`Example app listening at ${port}`);
 });
