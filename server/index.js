@@ -43,7 +43,7 @@ app.get('/styles/:params', (req, res) => {
 // API request to get the reviews based on a different sort option
 app.get('/reviews/:product_id/:sort', (req, res) => {
   const { product_id, sort } = req.params;
-  axios.get(`http://localhost:3003/reviews/${product_id}/${sort}`)
+  axios.get(`http://52.25.85.5/reviews/${product_id}/${sort}`)
     .then((data) => res.send(data.data))
     .catch((err) => console.log('error getting reviews', err.response.data));
 });
@@ -51,7 +51,7 @@ app.get('/reviews/:product_id/:sort', (req, res) => {
 // API request to get the reviews meta data
 app.get('/api/reviews/meta/:product_id', (req, res) => {
   const { product_id } = req.params;
-  axios.get(`http://localhost:3003/api/reviews/meta/${product_id}`)
+  axios.get(`http://52.25.85.5/api/reviews/meta/${product_id}`)
     .then((data) => res.send(data.data))
     .catch((err) => console.log('error getting reviews', err.response.data));
 });
@@ -67,21 +67,21 @@ app.get('/questions/:params', (req, res) => {
 
 // API request to increment the helpfulness counter
 app.put('/reviews/help', (req, res) => {
-  axios.put(`http://localhost:3003/reviews/help`, { body: { id: req.body.id } })
+  axios.put(`http://52.25.85.5/reviews/help`, { body: { id: req.body.id } })
     .then(() => res.sendStatus(204))
     .catch((err) => console.log('server help error', err));
 });
 
 // API request to remove the review
 app.put('/reviews/report', (req, res) => {
-  axios.put(`http://localhost:3003/reviews/report`, { body: { id: req.body.id } })
+  axios.put(`http://52.25.85.5/reviews/report`, { body: { id: req.body.id } })
     .then(() => res.send(204))
     .catch((err) => console.log('server report error', err));
 });
 
 // API request to post a new review
 app.post('/newReview/', (req, res) => {
-  axios.post(`http://localhost:3003/newReview/`, req.body.reviewObj)
+  axios.post(`http://52.25.85.5/newReview/`, req.body.reviewObj)
     .then((response) => {
       console.log('server review submit success');
       res.send(201);
