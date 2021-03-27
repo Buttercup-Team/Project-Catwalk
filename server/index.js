@@ -6,7 +6,7 @@ const port = 3000;
 const path = require('path');
 const { reset } = require('nodemon');
 const config = require('../config.js');
-const TOKEN = config.TOKEN
+const TOKEN = config.TOKEN;
 
 const PUBLIC_DIR = path.resolve(__dirname, '..', 'public');
 
@@ -14,26 +14,26 @@ app.use(express.static(PUBLIC_DIR));
 app.use(express.json());
 
 const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/';
-            'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/20113';
+('https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/20113');
 
 // API request to get the product info
 app.get('/product/:params', (req, res) => {
   const { params } = req.params;
-  axios.get(`${url}products/${params}`, {
-    headers: { Authorization: TOKEN },
-  })
+  axios
+    .get(`http://18.217.87.199/product/${params}`)
     .then((data) => {
       res.send(data.data);
     })
-    .catch((err) => console.log('error getting product info', err.response.data));
+    .catch((err) =>
+      console.log('error getting product info', err.response.data)
+    );
 });
 
 // API request to get the styles
 app.get('/styles/:params', (req, res) => {
   const { params } = req.params;
-  axios.get(`${url}products/${params}/styles`, {
-    headers: { Authorization: TOKEN },
-  })
+  axios
+    .get(`http://18.217.87.199/styles/${params}`)
     .then((data) => {
       res.send(data.data);
     })
@@ -43,7 +43,8 @@ app.get('/styles/:params', (req, res) => {
 // API request to get the reviews based on a different sort option
 app.get('/reviews/:product_id/:sort', (req, res) => {
   const { product_id, sort } = req.params;
-  axios.get(`http://localhost:3003/reviews/${product_id}/${sort}`)
+  axios
+    .get(`http://localhost:3003/reviews/${product_id}/${sort}`)
     .then((data) => res.send(data.data))
     .catch((err) => console.log('error getting reviews', err.response.data));
 });
@@ -51,37 +52,42 @@ app.get('/reviews/:product_id/:sort', (req, res) => {
 // API request to get the reviews meta data
 app.get('/api/reviews/meta/:product_id', (req, res) => {
   const { product_id } = req.params;
-  axios.get(`http://localhost:3003/api/reviews/meta/${product_id}`)
+  axios
+    .get(`http://localhost:3003/api/reviews/meta/${product_id}`)
     .then((data) => res.send(data.data))
     .catch((err) => console.log('error getting reviews', err.response.data));
 });
 
 app.get('/questions/:params', (req, res) => {
   const { params } = req.params;
-  axios.get(`${url}qa/questions/?product_${params}`, {
-    headers: { Authorization: TOKEN },
-  })
+  axios
+    .get(`${url}qa/questions/?product_${params}`, {
+      headers: { Authorization: TOKEN },
+    })
     .then((data) => res.send(data.data))
     .catch((err) => console.log('error getting questions', err.response.data));
 });
 
 // API request to increment the helpfulness counter
 app.put('/reviews/help', (req, res) => {
-  axios.put(`http://localhost:3003/reviews/help`, { body: { id: req.body.id } })
+  axios
+    .put(`http://localhost:3003/reviews/help`, { body: { id: req.body.id } })
     .then(() => res.sendStatus(204))
     .catch((err) => console.log('server help error', err));
 });
 
 // API request to remove the review
 app.put('/reviews/report', (req, res) => {
-  axios.put(`http://localhost:3003/reviews/report`, { body: { id: req.body.id } })
+  axios
+    .put(`http://localhost:3003/reviews/report`, { body: { id: req.body.id } })
     .then(() => res.send(204))
     .catch((err) => console.log('server report error', err));
 });
 
 // API request to post a new review
 app.post('/newReview/', (req, res) => {
-  axios.post(`http://localhost:3003/newReview/`, req.body.reviewObj)
+  axios
+    .post(`http://localhost:3003/newReview/`, req.body.reviewObj)
     .then((response) => {
       console.log('server review submit success');
       res.send(201);
@@ -95,9 +101,10 @@ app.post('/newReview/', (req, res) => {
 // API request to post a new answer to an existing question
 app.post('/api/qa/questions/:questionId/answers', (req, res) => {
   const { questionId } = req.params;
-  axios.post(`${url}qa/questions/${questionId}/answers`, req.body.params, {
-    headers: { Authorization: TOKEN },
-  })
+  axios
+    .post(`${url}qa/questions/${questionId}/answers`, req.body.params, {
+      headers: { Authorization: TOKEN },
+    })
     .then((response) => {
       console.log('server answer submit response');
       res.send(201);
@@ -110,9 +117,10 @@ app.post('/api/qa/questions/:questionId/answers', (req, res) => {
 
 // API request to post a new question
 app.post('/api/qa/questions', (req, res) => {
-  axios.post(`${url}qa/questions`, req.body, {
-    headers: { Authorization: TOKEN },
-  })
+  axios
+    .post(`${url}qa/questions`, req.body, {
+      headers: { Authorization: TOKEN },
+    })
     .then((response) => {
       console.log('server question submit response');
       res.sendStatus(201);
@@ -126,9 +134,14 @@ app.post('/api/qa/questions', (req, res) => {
 // API request to increment the helpfulness of an answer
 app.put('/api/qa/answers/:answerId/helpful', (req, res) => {
   const { answerId } = req.params;
-  axios.put(`${url}qa/answers/${answerId}/helpful`, { body: { answer_id: req.body.id } }, {
-    headers: { Authorization: TOKEN },
-  })
+  axios
+    .put(
+      `${url}qa/answers/${answerId}/helpful`,
+      { body: { answer_id: req.body.id } },
+      {
+        headers: { Authorization: TOKEN },
+      }
+    )
     .then((response) => {
       console.log('server helpfulness put response');
       res.sendStatus(201);
@@ -142,9 +155,14 @@ app.put('/api/qa/answers/:answerId/helpful', (req, res) => {
 // API request to increment the helpfulness of a question
 app.put('/api/qa/questions/:questionId/helpful', (req, res) => {
   const { questionId } = req.params;
-  axios.put(`${url}qa/questions/${questionId}/helpful`, { body: { question_id: req.body.id } }, {
-    headers: { Authorization: TOKEN },
-  })
+  axios
+    .put(
+      `${url}qa/questions/${questionId}/helpful`,
+      { body: { question_id: req.body.id } },
+      {
+        headers: { Authorization: TOKEN },
+      }
+    )
     .then((response) => {
       console.log('server helpfulness question put response');
       res.sendStatus(201);
@@ -158,9 +176,14 @@ app.put('/api/qa/questions/:questionId/helpful', (req, res) => {
 // API request to report this answer
 app.put('/api/qa/answers/:answerId/report', (req, res) => {
   const { answerId } = req.params;
-  axios.put(`${url}qa/answers/${answerId}/report`, { body: { answer_id: req.body.id } }, {
-    headers: { Authorization: TOKEN },
-  })
+  axios
+    .put(
+      `${url}qa/answers/${answerId}/report`,
+      { body: { answer_id: req.body.id } },
+      {
+        headers: { Authorization: TOKEN },
+      }
+    )
     .then((response) => {
       console.log('server report put response');
       res.sendStatus(201);
